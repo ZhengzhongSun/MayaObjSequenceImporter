@@ -16,11 +16,20 @@ def selectDir():
 	cmds.textScrollList(path, edit=True, append=objList)
 
 def importer():
+	global nameseq
 	objList.sort()
+	namearray = []
 	for each in objList:
 		loaded=cmds.file(each,i=True,dns=True)
-	cmds.deleteUI('objwindow',window=True)
-	getMeshes()
+		cmds.select("Mesh")
+		cmds.rename("Mesh{}".format(nameseq))
+		namearray.append("Mesh{}".format(nameseq))
+		nameseq += 1
+	getMeshes(namearray)
+	
+def clear():
+	objList = []
+	cmds.textScrollList(path, edit=True, removeAll=True)
 
 def loadWin():
 	if cmds.window('objwindow',exists=True):
@@ -32,15 +41,25 @@ def loadWin():
 	path=cmds.textScrollList(w=250)
 	browseButton=cmds.button(label='browse',w=250,c='selectDir()')
 	importButton=cmds.button(label='import',w=250,c='importer()')
+	clearButton=cmds.button(label='clear',w=250,c='clear()')
 	cmds.showWindow(win)
 
-def getMeshes():
+def getMeshes(namearray):
+	global groupid
 	newScene=cmds.ls(assemblies=True)
-	meshList=[mesh for mesh in newScene if mesh not in current_scene]
-	cmds.group(meshList,n="OBJ_GROUP")
+	meshList=namearray
+	groupname = "OBJ_GROUP{}".format(groupid)
+	print(meshList)
+	cmds.group(meshList,n=groupname)
+	
 	for i in range(len(meshList)):
 		cmds.setKeyframe(meshList[i],attribute='visibility',value=0,t=0)
 		cmds.setKeyframe(meshList[i],attribute='visibility',value=1,t=i+1)
 		cmds.setKeyframe(meshList[i],attribute='visibility',value=0,t=i+2)
+		
+	groupid += 1
+	
 
+groupid = 0
+nameseq = 0
 loadWin()
