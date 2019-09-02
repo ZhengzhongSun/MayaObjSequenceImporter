@@ -7,3 +7,6 @@ This scipt is modified from mayapy(https://mayapy.wordpress.com/2011/12/19/obj-s
 2. Click browse button to select the objs you want to import. Then the objs will be listed in the Path to files window.  
 3. Click import button to import the obj sequence you select.
 4. Click clear button to clear the selected objs, so you can import another sequence by repeating the above operation.
+
+## Warning
+1. The folder name and file name should only contain number, letter or underscore.

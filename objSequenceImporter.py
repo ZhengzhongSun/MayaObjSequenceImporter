@@ -26,7 +26,7 @@ def importer():
 		label0 = each[0:label1].rfind("/")
 		folder_name = each[label0+1:label1]
 		# use the folder name and file name to be the model name in maya
-		model_name = folder_name+"_"+file_name
+		model_name = "Mesh_"+folder_name+"_"+file_name
 		print(model_name)
 		cmds.select("Mesh")
 		cmds.rename("{}".format(model_name))
