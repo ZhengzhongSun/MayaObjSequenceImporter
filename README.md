@@ -9,4 +9,4 @@ This scipt is modified from mayapy(https://mayapy.wordpress.com/2011/12/19/obj-s
 4. Click clear button to clear the selected objs, so you can import another sequence by repeating the above operation.
 
 ## Warning
-1. The folder name and file name should only contain number, letter or underscore.
+1. The folder name and file name should only contain number, letter and underscore. Because Maya will change the model name automitically when there are illegal characters.
